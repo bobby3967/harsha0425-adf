@@ -38,7 +38,7 @@ jobs:
         working-directory: ${{ github.workspace }}/Ingestion/build
 
       - name: Upload exported ARM templates
-        uses: actions/upload-artifact@v3.1.0
+        uses: actions/upload-artifact@v3
         with:
           name: ExportedArmTemplate
           path: ${{ github.workspace }}/Ingestion/build/ExportedArmTemplate

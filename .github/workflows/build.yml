@@ -1,0 +1,73 @@
+name: ADF CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - development
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build:
+    name: Build & Export ADF ARM Templates
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.4.1
+        with:
+          node-version: 14.x
+
+      - name: Install ADF Utilities package
+        run: npm install
+        working-directory: ${{ github.workspace }}/Ingestion
+
+      - name: Validate ADF Code (from repo only)
+        run: npm run build validate ${{ github.workspace }}/ADFroot/
+        working-directory: ${{ github.workspace }}/ADFroot
+
+      - name: Generate ARM templates
+        run: npm run build export ${{ github.workspace }}/ADFroot/ ExportedArmTemplate
+        working-directory: ${{ github.workspace }}/ADFroot
+
+      - name: Upload exported ARM templates
+        uses: actions/upload-artifact@v3
+        with:
+          name: ExportedArmTemplate
+          path: ${{ github.workspace }}/ADFroot/ExportedArmTemplate
+
+  release:
+    name: Release to Target ADF
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download exported ARM templates
+        uses: actions/download-artifact@v3
+        with:
+          name: ExportedArmTemplate
+          path: ExportedArmTemplate
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          enable-AzPSSession: true
+
+      - name: Deploy ADF ARM templates to target
+        uses: Azure/data-factory-deploy-action@v1.2.0
+        with:
+          resourceGroupName: ${{ secrets.TARGET_RESOURCE_GROUP }}
+          dataFactoryName: ${{ secrets.TARGET_FACTORY_NAME }}
+          armTemplateFile: ExportedArmTemplate/ARMTemplateForFactory.json
+          armTemplateParametersFile: ExportedArmTemplate/ARMTemplateParametersForFactory.json
+          additionalParameters: factoryName=${{ secrets.TARGET_FACTORY_NAME }}

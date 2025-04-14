@@ -25,23 +25,23 @@ jobs:
         with:
           node-version: 14.x
 
-      - name: Install ADF Utilities package
+      - name: Install dependencies
         run: npm install
-        working-directory: ${{ github.workspace }}/Ingestion/build
+        working-directory: ${{ github.workspace }}/Ingestion
 
       - name: Validate ADF Code (from repo only)
-        run: npm run build:validate ${{ github.workspace }}/Ingestion/
-        working-directory: ${{ github.workspace }}/Ingestion/build
+        run: npx adf validate ${{ github.workspace }}/Ingestion/
+        working-directory: ${{ github.workspace }}/Ingestion
 
       - name: Generate ARM templates
-        run: npm run build:export ${{ github.workspace }}/Ingestion/ ExportedArmTemplate
-        working-directory: ${{ github.workspace }}/Ingestion/build
+        run: npx adf export ${{ github.workspace }}/Ingestion/ ExportedArmTemplate
+        working-directory: ${{ github.workspace }}/Ingestion
 
       - name: Upload exported ARM templates
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: ExportedArmTemplate
-          path: ${{ github.workspace }}/Ingestion/build/ExportedArmTemplate
+          path: ${{ github.workspace }}/Ingestion/ExportedArmTemplate
 
   release:
     name: Release to Target ADF

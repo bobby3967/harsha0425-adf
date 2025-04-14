@@ -3,7 +3,7 @@ name: ADF CI/CD Pipeline
 on:
   push:
     branches:
-      - uat
+      - Development
   workflow_dispatch:
 
 permissions:

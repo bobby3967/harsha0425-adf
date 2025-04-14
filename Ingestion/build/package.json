@@ -1,0 +1,13 @@
+{
+    "name": "adf-deployment",
+    "version": "1.0.0",
+    "description": "Azure Data Factory CI/CD Utility",
+    "scripts": {
+      "build": "adf",
+      "build:validate": "adf validate",
+      "build:export": "adf export"
+    },
+    "dependencies": {
+      "@microsoft/azure-data-factory-utilities": "^0.1.4"
+    }
+  }

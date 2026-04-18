@@ -4,6 +4,15 @@
 	"parameters": {
 		"factoryName": {
 			"value": "harsha0425-adf"
+		},
+		"HttpServer1_password": {
+			"value": ""
+		},
+		"HttpServer1_properties_typeProperties_url": {
+			"value": "https://www.google.com/"
+		},
+		"HttpServer1_properties_typeProperties_userName": {
+			"value": "123"
 		}
 	}
 }

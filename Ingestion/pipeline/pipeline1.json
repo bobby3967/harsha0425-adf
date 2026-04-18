@@ -16,7 +16,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"method": "GET",
-					"url": "https://www.google.com/"
+					"url": {
+						"value": "https://www.google.com/",
+						"type": "Expression"
+					}
 				}
 			}
 		],

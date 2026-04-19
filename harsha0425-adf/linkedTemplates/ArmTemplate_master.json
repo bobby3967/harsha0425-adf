@@ -1207,6 +1207,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'HttpServer99'"
 		},
+		"HttpServer301_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'HttpServer301'"
+		},
 		"HttpServer1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://www.google.com/"
@@ -3606,6 +3610,14 @@
 		"HttpServer99_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "123"
+		},
+		"HttpServer301_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "a"
+		},
+		"HttpServer301_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "a"
 		},
 		"containerUri": {
 			"type": "string",
@@ -6626,11 +6638,20 @@
 					"HttpServer99_password": {
 						"value": "[parameters('HttpServer99_password')]"
 					},
+					"HttpServer301_password": {
+						"value": "[parameters('HttpServer301_password')]"
+					},
 					"HttpServer99_properties_typeProperties_url": {
 						"value": "[parameters('HttpServer99_properties_typeProperties_url')]"
 					},
 					"HttpServer99_properties_typeProperties_userName": {
 						"value": "[parameters('HttpServer99_properties_typeProperties_userName')]"
+					},
+					"HttpServer301_properties_typeProperties_url": {
+						"value": "[parameters('HttpServer301_properties_typeProperties_url')]"
+					},
+					"HttpServer301_properties_typeProperties_userName": {
+						"value": "[parameters('HttpServer301_properties_typeProperties_userName')]"
 					}
 				}
 			},

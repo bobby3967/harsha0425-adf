@@ -1207,6 +1207,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'HttpServer99'"
 		},
+		"HttpServer301_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'HttpServer301'"
+		},
 		"HttpServer1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://www.google.com/"
@@ -3606,6 +3610,14 @@
 		"HttpServer99_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "123"
+		},
+		"HttpServer301_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "a"
+		},
+		"HttpServer301_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "a"
 		}
 	},
 	"variables": {
@@ -9642,6 +9654,26 @@
 					"password": {
 						"type": "SecureString",
 						"value": "[parameters('HttpServer99_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/HttpServer301')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "HttpServer",
+				"typeProperties": {
+					"url": "[parameters('HttpServer301_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Basic",
+					"userName": "[parameters('HttpServer301_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('HttpServer301_password')]"
 					}
 				}
 			},

@@ -905,6 +905,9 @@
 		"HttpServer99_password": {
 			"value": ""
 		},
+		"HttpServer301_password": {
+			"value": ""
+		},
 		"HttpServer1_properties_typeProperties_url": {
 			"value": "https://www.google.com/"
 		},
@@ -2704,6 +2707,12 @@
 		},
 		"HttpServer99_properties_typeProperties_userName": {
 			"value": "123"
+		},
+		"HttpServer301_properties_typeProperties_url": {
+			"value": "a"
+		},
+		"HttpServer301_properties_typeProperties_userName": {
+			"value": "a"
 		},
 		"containerUri": {
 			"value": ""
